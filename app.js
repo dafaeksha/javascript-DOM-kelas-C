@@ -102,13 +102,13 @@ function perbaruiJumlah() {
 }
 
 
-// Langkah 3 : Membuat Fungsi untuk Menambahkan catatan baru
+// Langkah 3: Membuat Fungsi untuk menambahkan catatan baru
 function tambahCatatan() {
     // 3.1 inputCatatan.value -> Mengambil teks yang diketik user di input
-    // .trim() -> Menghapus spasi kosong di awal dan akhir teks
+    // .trim() -> Menghapus spasi di awal dan akhir teks
     const isiTeks = inputCatatan.value.trim();
 
-    // 3.2 Validasi Input: Jika Variabel isiTeks kosong (""), maka tampilkan alert
+    // 3.2 Validasi Input: Jika variabel isiTeks kosong(""), maka tampilkan alert
     if (isiTeks === "") {
         alert("Catatan tidak boleh kosong!");
         return; // Hentikan fungsi jika input kosong
@@ -118,55 +118,42 @@ function tambahCatatan() {
     const liBaru = document.createElement("li");
     liBaru.className = "note-item"; // Memberi class agar tampilannya sesuai style CSS
 
-// 3.4 Mengisi teks catatan baru dengan cara innerHTML mengisi <li> dengan teks dan tombol hapus
-  // Tanda Backtick (`) digunakan agar kita bisa menulis teks multi-baris dan menyisipkan variabel dengan ${variabel}
-  liBaru.innerHTML = `<span>${isiTeks}</span> <button class="btn-hapus">Hapus</button>`;
+    // 3.4 Mengisi teks catatan baru dengan cara innerHTML mengisi <li> dengan teks dan tombol hapus
+    // Tanda Backtick (`) digunakan agar kita bisa menulis teks multi-baris dan menyisipkan variabel dengan ${variabel}
+    liBaru.innerHTML = `<span>${isiTeks}</span> <button class="btn-hapus">Hapus</button>`;
 
-  // 3.5 Menambahkan EVent Listener pada tombol hapus di catatan <li> baru
-  // querySelector(".btn-hapus") -> Menargetkan tombol hapus yang baru dibuat di dalam <li>
-  const btnHapus = liBaru.querySelector(".btn-hapus");
-  btnHapus.addEventListener("click", function () {
-    // Menghapus <li> catatan baru dari daftarCatatan (<ul>)
-    liBaru.remove(); // Menghapus elemen <li> dari DOM .remove()
-    totalCatatan--; // Mengurangi jumlah catatan
-    perbaruiJumlah(); // Memperbarui tampilan jumlah catatan
-    console.log(`DOM Catatan "${isiTeks}" telah dihapus`);
-  });
+    // 3.5 Menambahkan EVent Listener pada tombol hapus di catatan <li> baru
+    // querySelector(".btn-hapus") -> Menargetkan tombol hapus yang baru dibuat di dalam <li>
+    const btnHapus = liBaru.querySelector(".btn-hapus");
+    btnHapus.addEventListener("click", function () {
+        // Menghapus <li> catatan baru dari daftarCatatan (<ul>)
+        liBaru.remove(); // Menghapus elemen <li> dari DOM .remove()
+        totalCatatan--; // Mengurangi jumlah catatan
+        perbaruiJumlah(); // Memperbarui tampilan jumlah catatan
+        console.log(`DOM Catatan "${isiTeks}" telah dihapus`);
+    })
 
-  // 3.6 .appendChild(liBaru) -> Menempelkan <li> baru ke dalam <ul> daftarCatatan
-  daftarCatatan.appendChild(liBaru);
+    // 3.6 .appendChild(liBaru) -> Menempelkan <li> baru ke dalam <ul> daftarCatatan
+    daftarCatatan.appendChild(liBaru);
 
-  // 3.7 Mengosongkan input setelah catatan ditambahkan
-  inputCatatan.value = "";
+    // 3.7 Mengosongkan input setelah catatan ditambahkan
+    inputCatatan.value = "";
 
-  // 3.8 Menambah jumlah catatan dan memperbarui tampilan jumlah catatan
-  totalCatatan++;
-  perbaruiJumlah();
+    // 3.8 Menambah jumlah catatan dan memperbarui tampilan jumlah catatan
+    totalCatatan++;
+    perbaruiJumlah();
 
-  console.log(`DOM Catatan baru ditambahkan : "${isiTeks}"`);
+    console.log(`DOM Catatan baru ditambahkan : "${isiTeks}"`);
 }
 
 // Langkah 4: Event Listener untuk tombol tambah catatan
 // Ketika tombol tambah diklik, jalankan fungsi tambahCatatan
 btnTambah.addEventListener("click", function () {
-  tambahCatatan();
+    tambahCatatan();
 });
 
 // Langkah 5: Event Listener untuk menambahkan catatan ketika menekan tombol Enter di input
 inputCatatan.addEventListener("keyup", function (event) {
-  if (event.key === "Enter") {
-    tambahCatatan();
-  }
-});
-// Langkah 4 : Event Listener untuk tombol tambah catatan
-// Ketika tombol tambah diklik, jalankan fungsi tambahCatatan
-btnTambah.addEventListener("click", function(){
-    tambahCatatan();
-});
-
-
-// Langkah 5 : Event Listener untuk menambahkan catatan ketika menekan tombol Enter di
-inputCatatan.addEventListener("keyup", function(event){
     if (event.key === "Enter") {
         tambahCatatan();
     }
